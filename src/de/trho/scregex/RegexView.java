@@ -136,6 +136,7 @@ public class RegexView extends GridPane {
   private void sampleMatcher() {
     if (!compiled.get())
       return;
+
   }
 
   @FXML
