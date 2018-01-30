@@ -1,4 +1,6 @@
 /**/*.class
 /**/target
+/**/build
 /**/.settings
 /**/bin
+/**/*.jar

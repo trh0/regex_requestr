@@ -8,12 +8,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import okhttp3.OkHttpClient;
@@ -78,11 +80,13 @@ public class RegexView extends GridPane {
   @FXML
   private JFXTextField          tx_url;
   @FXML
-  private JFXButton             bt_compile, bt_run;
+  private JFXButton             bt_compile, bt_run, bt_headers;
   @FXML
   private Text                  lbl_compiler, lbl_count;
   @FXML
   private JFXTextArea           tx_compiler, tx_result, tx_regex, tx_sample;
+
+  private JFXDialog             headersDialog;
 
   private final ExecutorService ex       = Executors.newFixedThreadPool(2);
 
@@ -91,13 +95,15 @@ public class RegexView extends GridPane {
   private final String          example  = "http://api.soundcloud.com/track/434736414/";
 
   @FXML
-  void initialize() {}
+  void initialize() {
+    // this.headersDialog = new JFXDialog(new StackPane());
+  }
 
   void rua() throws IOException {
     final OkHttpClient c = new OkHttpClient();
     final Request r = new Request.Builder()
         .url("https://soundcloud.com/when-we-dip/sets/bodys-up-radioshow-hosted-by-1").get()
-        .build();
+        .header("accept", "application/json").build();
 
     Response execute = c.newCall(r).execute();
     String body = execute.body().string();
@@ -114,6 +120,9 @@ public class RegexView extends GridPane {
     } else
       gr = "Nope...";
   }
+
+  @FXML
+  void toggleHeaderView(ActionEvent event) {}
 
   @FXML
   void compile(ActionEvent event) {
