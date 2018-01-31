@@ -10,8 +10,12 @@ import javafx.stage.Stage;
 public class App extends Application {
   @Override
   public void start(Stage stage) {
-    AppController.AppName = "regex";
-    AppController.instance().initUi(stage);;
+    try {
+      AppController.AppName = "regex";
+      AppController.instance().initUi(stage);;
+    } catch (Exception e) {
+      System.exit(1);
+    }
 
     // try {
     // final RegexView controller = new RegexView();

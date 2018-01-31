@@ -1,18 +1,20 @@
 package de.trho.scregex;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialog.DialogTransition;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import de.trho.fxcore.AppController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -72,31 +74,39 @@ public class RegexView extends GridPane {
   }
 
   @FXML
-  private HBox                  c_checkboxes;
+  private HBox                c_checkboxes;
   @FXML
-  private VBox                  c_compiler, c_results;
+  private VBox                c_compiler, c_results;
   @FXML
-  private JFXCheckBox           cb_req, cb_regex;
+  private JFXCheckBox         cb_req, cb_regex;
   @FXML
-  private JFXTextField          tx_url;
+  private JFXTextField        tx_url;
   @FXML
-  private JFXButton             bt_compile, bt_run, bt_headers;
+  private JFXButton           bt_compile, bt_run, bt_headers;
   @FXML
-  private Text                  lbl_compiler, lbl_count;
+  private Text                lbl_compiler, lbl_count;
   @FXML
-  private JFXTextArea           tx_compiler, tx_result, tx_regex, tx_sample;
+  private JFXTextArea         tx_compiler, tx_result, tx_regex, tx_sample;
 
-  private JFXDialog             headersDialog;
+  private Dialog<?>           hDialog;
 
-  private final ExecutorService ex       = Executors.newFixedThreadPool(2);
-
-  private volatile Pattern      pattern;
-  private final AtomicBoolean   compiled = new AtomicBoolean(false);
-  private final String          example  = "http://api.soundcloud.com/track/434736414/";
+  private HeaderView          headerView;
+  private volatile Pattern    pattern;
+  private final AtomicBoolean compiled = new AtomicBoolean(false);
+  private final String        example  = "http://api.soundcloud.com/track/434736414/";
+  private final AppController ctrl     = AppController.instance();
 
   @FXML
   void initialize() {
-    // this.headersDialog = new JFXDialog(new StackPane());
+    this.headerView = ctrl.loadFxml(HeaderView.class, "HeaderView.fxml");
+    this.hDialog = new Dialog<>();
+    this.hDialog.setTitle("Headers & Params");
+    this.hDialog.setOnCloseRequest((event) -> {
+      this.hDialog.hide();
+    });
+    this.hDialog.getDialogPane().getStylesheets().add(ctrl.getStylesheet());
+    this.hDialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+    this.hDialog.getDialogPane().setContent(headerView);
   }
 
   void rua() throws IOException {
@@ -122,7 +132,9 @@ public class RegexView extends GridPane {
   }
 
   @FXML
-  void toggleHeaderView(ActionEvent event) {}
+  void toggleHeaderView(ActionEvent event) {
+    this.hDialog.show();
+  }
 
   @FXML
   void compile(ActionEvent event) {

@@ -14,8 +14,8 @@ public class Cfg extends Properties {
 
   private static final long serialVersionUID = 6920425932241661714L;
   public static boolean     DEV              = true;
-  public final String       WorkingDirName;
   public final String       ConfigFileName   = "config.cfg";
+  public final String       WorkingDirName;
 
   public File contextDir() {
     if (this.dir != null)
