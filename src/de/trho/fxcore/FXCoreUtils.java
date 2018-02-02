@@ -1,7 +1,6 @@
 package de.trho.fxcore;
 
 import java.time.Duration;
-import java.util.Arrays;
 import java.util.regex.Pattern;
 import org.reactfx.EventStreams;
 import javafx.scene.control.TextField;

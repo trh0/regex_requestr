@@ -1,6 +1,5 @@
 package de.trho.scregex;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -33,41 +32,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class RegexView extends GridPane {
-
-  public enum API {
-    TRACK("track"), TRACKS("tracks"), PLAYLISTS("playlists"), PLAYLIST("playlist");
-    public static final String APIURL = "https://api.soundcloud.com";
-    private final String       route;
-    private String             url;
-
-    private API(final String s) {
-      this.route = s;
-      this.url = APIURL + "/" + s;
-    }
-
-    public API with(final String sub) {
-      this.url = APIURL + "/" + this.route + "/" + sub;
-      return this;
-    }
-
-    public String url(final String... params) {
-      if (params != null)
-        for (int i = 0; i < params.length; i += 2) {
-          this.url += (i == 0) ? "?" : "&";
-          this.url += params[i];
-          this.url += params[i + 1];
-        }
-      return this.url;
-    }
-
-    public String withAuth() {
-      return this.url("client_id", "b70168637ad772444b9f5c34b97fe543");
-    }
-
-    public String route() {
-      return this.route;
-    }
-  }
 
   private void toCompilerConsole(final Object value) {
     final StringBuilder sb = new StringBuilder();
@@ -123,38 +87,6 @@ public class RegexView extends GridPane {
     FXCoreUtils.addValidator(
         "^(http(s)?(:\\/\\/))?(www\\.)?[a-zA-Z0-9-_\\.]+(\\.[a-zA-Z0-9]{2,})([-a-zA-Z0-9:%_\\+.~#?&//=]*)",
         this.tx_url, "pass", "warn");
-  }
-
-  void rua() throws IOException {
-    final String example = "http://api.soundcloud.com/track/434736414/";
-
-    final Request r = new Request.Builder()
-        .url("https://soundcloud.com/when-we-dip/sets/bodys-up-radioshow-hosted-by-1").get()
-        .header("accept", "application/json").build();
-
-    Response execute = client.newCall(r).execute();
-    String body = execute.body().string();
-    int ix = body.indexOf("<meta property=\"twitter:player\" content=\"");
-    int x = body.indexOf("\n", ix);
-    String embed = body.substring(ix, x);
-
-    Pattern p = Pattern.compile(
-        "(?<=w\\.soundcloud\\.com/player/\\?url\\=https%3A%2F%2Fapi\\.soundcloud\\.com%2F)[A-Za-z0-9\\.%]+[^&]");
-    Matcher m = p.matcher(embed);
-    c_results.getChildren().clear();
-    if (m.matches()) {
-      final int groupCount = m.groupCount();
-      this.lbl_count.setText(String.valueOf(groupCount));
-      for (int i = 0; i < groupCount; i++) {
-        final JFXTextField tf = new JFXTextField();
-        tf.setDisable(true);
-        tf.setText(m.group());
-        c_results.getChildren().add(tf);
-      }
-      c_results.getChildren().forEach(e -> VBox.setVgrow(e, Priority.ALWAYS));
-    } else {
-      this.lbl_count.setText(String.valueOf(0));
-    }
   }
 
   @FXML
