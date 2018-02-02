@@ -14,6 +14,7 @@ public class App extends Application {
       AppController.AppName = "regex";
       AppController.instance().initUi(stage);;
     } catch (Exception e) {
+      e.printStackTrace();
       System.exit(1);
     }
 

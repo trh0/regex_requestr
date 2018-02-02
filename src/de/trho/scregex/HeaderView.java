@@ -21,26 +21,24 @@ import javafx.scene.layout.VBox;
 public class HeaderView extends GridPane {
 
   @FXML
-  private VBox                      c_headers, c_params;
+  private VBox      c_headers, c_params;
 
   @FXML
-  private JFXButton                 bt_addHeader, bt_addParam;
-
-  private final Map<String, String> tmp = new HashMap<>();
+  private JFXButton bt_addHeader, bt_addParam;
 
   public Map<String, String> getHeaders() {
-    tmp.clear();
-    fillMap(c_headers);
-    return this.tmp;
+    final Map<String, String> map = new HashMap<>();
+    fillMap(c_headers, map);
+    return map;
   }
 
   public Map<String, String> getParams() {
-    tmp.clear();
-    fillMap(c_params);
-    return this.tmp;
+    final Map<String, String> map = new HashMap<>();
+    fillMap(c_params, map);
+    return map;
   }
 
-  private void fillMap(final Pane parent) {
+  private void fillMap(final Pane parent, final Map<String, String> map) {
     final ObservableList<Node> chlds = parent.getChildren();
     for (Node c : chlds) {
       if (c instanceof HBox) {
@@ -49,9 +47,9 @@ public class HeaderView extends GridPane {
           final Node n2 = ((HBox) c).getChildren().get(1);
           final String key = ((TextField) n1).getText();
           final String value = ((TextField) n2).getText();
-          if (key == null || key.isEmpty())
+          if (key == null || key.isEmpty() || value == null || value.isEmpty())
             continue;
-          tmp.put(key, value);
+          map.put(key, value);
         }
       }
     }

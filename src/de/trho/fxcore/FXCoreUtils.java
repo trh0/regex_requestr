@@ -15,12 +15,6 @@ public class FXCoreUtils {
     EventStreams.valuesOf(target.textProperty()).successionEnds(Duration.ofMillis(250))
         .subscribe((value) -> {
           if (value != null && !value.isEmpty()) {
-            final char[] cs = value.toCharArray();
-            final int[] ar = new int[cs.length];
-            for (int i = 0; i < cs.length; i++) {
-              ar[i] = cs[i];
-            }
-            System.out.println(value + " " + Arrays.toString(ar));
             if (p.matcher(value).matches()) {
               target.getStyleClass().remove(invalidClass);
               target.getStyleClass().add(validClass);
@@ -28,6 +22,9 @@ public class FXCoreUtils {
               target.getStyleClass().remove(validClass);
               target.getStyleClass().add(invalidClass);
             }
+          } else {
+            target.getStyleClass().remove(validClass);
+            target.getStyleClass().remove(invalidClass);
           }
         });
   }

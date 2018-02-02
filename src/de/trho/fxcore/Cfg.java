@@ -12,10 +12,11 @@ import java.util.Properties;
 
 public class Cfg extends Properties {
 
-  private static final long serialVersionUID = 6920425932241661714L;
-  public static boolean     DEV              = true;
-  public final String       ConfigFileName   = "config.cfg";
-  public final String       WorkingDirName;
+  private static final long  serialVersionUID = 6920425932241661714L;
+  public static final String DirPrefix        = "assets/";
+  public static final String ConfigFileName   = "config.cfg";
+  public static boolean      DEV              = true;
+  public final String        WorkingDirName;
 
   public File contextDir() {
     if (this.dir != null)
@@ -48,7 +49,7 @@ public class Cfg extends Properties {
         this.load(Files.newInputStream(cfg.toPath(), StandardOpenOption.READ));
       } else {
         cfg.createNewFile();
-        this.load(Cfg.class.getClassLoader().getResourceAsStream(ConfigFileName));
+        this.load(Cfg.class.getClassLoader().getResourceAsStream(DirPrefix + ConfigFileName));
         this.setProperty("file.workingdir", dir.getAbsolutePath());
         store();
       }
