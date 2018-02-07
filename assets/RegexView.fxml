@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<fx:root hgap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="750.0" type="GridPane" vgap="5.0" xmlns="http://javafx.com/javafx/8.0.161" xmlns:fx="http://javafx.com/fxml/1">
+  <columnConstraints>
+      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="25.0" percentWidth="25.0" />
+    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="-Infinity" percentWidth="35.0" prefWidth="200.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="15.0" />
+    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="-Infinity" percentWidth="25.0" prefWidth="200.0" />
+  </columnConstraints>
+  <rowConstraints>
+      <RowConstraints percentHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
+      <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+      <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+    <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+  </rowConstraints>
+   <children>
+      <HBox fx:id="c_checkboxes" alignment="CENTER" minWidth="-Infinity" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+         <children>
+            <JFXButton fx:id="bt_run" minHeight="30.0" minWidth="75.0" onAction="#run" text="Run" HBox.hgrow="ALWAYS">
+               <ripplerFill>
+                  <RadialGradient centerX="0.5" centerY="0.4666666666666667" focusDistance="-0.11627906976744184" radius="1.0">
+                     <stops>
+                        <Stop color="#395372" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </ripplerFill>
+               <HBox.margin>
+                  <Insets bottom="5.0" right="5.0" />
+               </HBox.margin>
+            </JFXButton>
+            <JFXButton fx:id="bt_headers" minHeight="30.0" minWidth="125.0" onAction="#toggleHeaderView" ripplerFill="#608cb5" text="Headers &amp; Params" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets bottom="5.0" right="5.0" />
+               </HBox.margin>
+            </JFXButton>
+            <JFXTextField fx:id="tx_url" prefColumnCount="0" promptText="Request URL" styleClass="text" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets bottom="5.0" right="5.0" />
+               </HBox.margin>
+            </JFXTextField>
+         </children>
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin>
+      </HBox>
+      <JFXTextArea fx:id="tx_regex" prefColumnCount="1" promptText="Your regular expression." styleClass="regex" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+         <GridPane.margin>
+            <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin>
+      </JFXTextArea>
+      <VBox fx:id="c_compiler" alignment="TOP_CENTER" prefWidth="100.0" GridPane.columnIndex="2" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+         <children>
+            <Text fx:id="lbl_compiler" strokeType="OUTSIDE" strokeWidth="0.0" text="Regex Compiler Results" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin></Text>
+            <JFXTextArea fx:id="tx_compiler" editable="false" prefColumnCount="1" styleClass="regexRes" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin></JFXTextArea>
+         </children>
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin>
+      </VBox>
+      <JFXTextArea fx:id="tx_sample" prefColumnCount="0" promptText="Put text to test Your regular expression here. All content will be overwritten by the request-results." GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin></JFXTextArea>
+      <VBox alignment="TOP_CENTER" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+         <children>
+            <Text fx:id="lbl_matches" strokeType="OUTSIDE" strokeWidth="0.0" text="Matches">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin></Text>
+            <Text fx:id="lbl_count" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin></Text>
+            <JFXListView fx:id="listView" prefHeight="200.0" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </JFXListView>
+         </children>
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</fx:root>
