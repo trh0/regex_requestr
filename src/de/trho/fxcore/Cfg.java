@@ -12,7 +12,7 @@ import java.util.Properties;
 public class Cfg extends Properties {
 
   private static final long  serialVersionUID = 6920425932241661714L;
-  public static final String DirPrefix        = "assets/";
+  public static final String DirPrefix        = "";
   public static final String ConfigFileName   = "config.cfg";
   public static boolean      DEV              = true;
   public final String        WorkingDirName;

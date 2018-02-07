@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 
 public class AppController {
 
-  public static String AppName = "";
+  public static String AppName = "regexRequestR";
 
   private AppController() {
     this.config = new Cfg(AppName);

@@ -3,4 +3,7 @@
 /**/build
 /**/.settings
 /**/bin
-/**/*.jar
+/**/dmp
+regex.html
+RR.xml
+
