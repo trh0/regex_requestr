@@ -11,6 +11,11 @@ Download
 
 Either check out the _dist_ folder - the latest precompiled stable jar of the application can be found there, or clone, customize and build the application yourself.
 
+Improvements & Stuff todo
+-------------------------
+- Add highlighting of matches 
+- Advanced testing
+
 Contribution
 ------------
 
