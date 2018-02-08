@@ -17,7 +17,7 @@ Contribution
 Feel free to open pull requests for changes or fixes.  
 [Codestyle / Formatting (Eclipse formatter)](https://github.com/google/styleguide/blob/gh-pages/eclipse-java-google-style.xml)
 
-[License](../blob/master/license.md)
+[License](../master/license.md)
 -------
 
     Licensed under the Apache License, Version 2.0 (the "License");
